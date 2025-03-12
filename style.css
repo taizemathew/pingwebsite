@@ -1,47 +1,71 @@
 body {
     font-family: Arial, sans-serif;
+    background-color: #1e1e1e;
+    color: #ffffff;
     text-align: center;
+    margin: 0;
     padding: 20px;
-    background-color: #222;
-    color: white;
 }
 
-.url-container {
-    margin: 20px auto;
-    padding: 15px;
+.container {
     width: 50%;
-    background: #333;
+    margin: auto;
+    background: #2a2a2a;
+    padding: 20px;
     border-radius: 10px;
-    box-shadow: 2px 2px 10px rgba(255, 255, 255, 0.2);
+    box-shadow: 0px 0px 10px rgba(0, 255, 0, 0.6);
+}
+
+h1, h2 {
+    color: #0f0;
+}
+
+.input-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+label {
+    margin-top: 10px;
 }
 
 input {
     width: 80%;
-    padding: 10px;
-    margin: 5px;
-    border: none;
+    padding: 8px;
+    margin-top: 5px;
+    background: #333;
+    color: #fff;
+    border: 1px solid #0f0;
     border-radius: 5px;
 }
 
 button {
-    padding: 10px;
-    margin: 5px;
-    cursor: pointer;
+    margin-top: 15px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background: #0f0;
+    color: #000;
     border: none;
+    cursor: pointer;
     border-radius: 5px;
-    background-color: #007bff;
-    color: white;
+    transition: 0.3s;
 }
 
 button:hover {
-    background-color: #0056b3;
+    background: #00ff00b0;
 }
 
-.log {
-    background: #444;
+#logContainer {
+    background: #111;
     padding: 10px;
-    margin: 5px;
+    height: 200px;
+    overflow-y: auto;
     border-radius: 5px;
-    color: lightgreen;
+    margin-top: 10px;
     text-align: left;
+    font-size: 14px;
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
 }
