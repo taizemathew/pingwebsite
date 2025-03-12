@@ -1,37 +1,32 @@
-// Function to save URL
-function saveURL(index) {
-    localStorage.setItem(`url${index}`, document.getElementById(`url${index}`).value.trim());
-    document.getElementById(`status${index}`).innerText = "URL saved successfully!";
-}
+document.getElementById("startPing").addEventListener("click", () => {
+    const urls = [
+        document.getElementById("url1").value,
+        document.getElementById("url2").value,
+        document.getElementById("url3").value,
+        document.getElementById("url4").value,
+        document.getElementById("url5").value
+    ].filter(url => url.trim() !== ""); // Remove empty URLs
 
-// Function to ping URL
-function pingURL(index) {
-    const url = localStorage.getItem(`url${index}`);
-    if (!url) {
-        document.getElementById(`status${index}`).innerText = "No URL saved.";
-        return;
+    function pingUrls() {
+        const logContainer = document.getElementById("logContainer");
+        const timestamp = new Date().toLocaleTimeString();
+
+        urls.forEach(url => {
+            fetch(url)
+                .then(response => {
+                    const status = response.ok ? "✅ Success" : "❌ Failed";
+                    logContainer.innerHTML += `<p><b>${timestamp}</b> - Pinged: <a href="${url}" target="_blank">${url}</a> - ${status}</p>`;
+                })
+                .catch(() => {
+                    logContainer.innerHTML += `<p><b>${timestamp}</b> - Pinged: <a href="${url}" target="_blank">${url}</a> - ❌ Failed</p>`;
+                });
+        });
+
+        // Auto-scroll to the latest log entry
+        logContainer.scrollTop = logContainer.scrollHeight;
     }
-    const logContainer = document.getElementById(`log-container${index}`);
-    fetch(url, { method: "GET", mode: "no-cors" })
-        .then(() => {
-            const timestamp = new Date().toLocaleTimeString() + ":" + new Date().getMilliseconds();
-            const logEntry = document.createElement("div");
-            logEntry.className = "log";
-            logEntry.innerText = `${timestamp} - Pinged: ${url}`;
-            logContainer.appendChild(logEntry);
-            console.log(`Pinged ${url} at ${timestamp}`);
-        })
-        .catch(error => console.error(`Ping failed for ${url}:`, error));
-}
 
-// Function to start auto pinging every 5 minutes
-function startAutoPing(index) {
-    setInterval(() => pingURL(index), 300000); // 300,000 ms = 5 minutes
-}
-
-// Start auto ping for each URL when the page loads
-window.onload = function() {
-    for (let i = 1; i <= 5; i++) {
-        startAutoPing(i);
-    }
-};
+    // Start Pinging Every 5 Minutes (300,000 ms)
+    pingUrls(); // First immediate ping
+    setInterval(pingUrls, 300000);
+});
