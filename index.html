@@ -3,87 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Multi-URL Pinger</title>
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; background-color: #333; color: white; }
-        .url-container { margin: 20px 0; }
-        input { width: 300px; padding: 8px; margin: 5px; }
-        button { padding: 10px; margin: 5px; cursor: pointer; }
-        .log { background: #444; padding: 10px; margin: 5px; border-radius: 5px; color: lightgreen; }
-    </style>
-    <script>
-        function saveURL(index) {
-            localStorage.setItem(`url${index}`, document.getElementById(`url${index}`).value.trim());
-            document.getElementById(`status${index}`).innerText = "URL saved successfully!";
-        }
-
-        function pingURL(index) {
-            const url = localStorage.getItem(`url${index}`);
-            if (!url) {
-                document.getElementById(`status${index}`).innerText = "No URL saved.";
-                return;
-            }
-            const logContainer = document.getElementById(`log-container${index}`);
-            fetch(url, { method: "GET", mode: "no-cors" })
-                .then(() => {
-                    const timestamp = new Date().toLocaleTimeString() + ":" + new Date().getMilliseconds();
-                    const logEntry = document.createElement("div");
-                    logEntry.className = "log";
-                    logEntry.innerText = `${timestamp} - Pinged: ${url}`;
-                    logContainer.appendChild(logEntry);
-                    console.log(`Pinged ${url} at ${timestamp}`);
-                })
-                .catch(error => console.error(`Ping failed for ${url}:`, error));
-        }
-setInterval(() => {
-    fetch("https://your-replit-app.repl.co")
-    .then(response => console.log("Pinged Replit!"))
-    .catch(error => console.log("Ping failed"));
-}, 300000); // Ping every 5 minutes (300,000 ms)
-
-    </script>
+    <title>Auto Ping Monitor</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Continuous URL Pinger</h1>
-    
-    <div class="url-container" id="container1">
-        <input type="text" id="url1" placeholder="Enter URL 1">
-        <button onclick="saveURL(1)">Save</button>
-        <button onclick="pingURL(1)">Ping Now</button>
-        <p id="status1">Enter URL and click Save.</p>
-        <div id="log-container1"></div>
+    <div class="container">
+        <h1>Auto Ping Activity Monitor</h1>
+        
+        <div class="input-section">
+            <label for="url1">URL 1:</label>
+            <input type="text" id="url1" value="https://replit.com/@TaizeMathew/Rogue-20">
+            
+            <label for="url2">URL 2:</label>
+            <input type="text" id="url2" placeholder="Enter URL 2">
+
+            <label for="url3">URL 3:</label>
+            <input type="text" id="url3" placeholder="Enter URL 3">
+
+            <label for="url4">URL 4:</label>
+            <input type="text" id="url4" placeholder="Enter URL 4">
+
+            <label for="url5">URL 5:</label>
+            <input type="text" id="url5" placeholder="Enter URL 5">
+            
+            <button id="startPing">Start Auto Ping</button>
+        </div>
+
+        <h2>Ping Activity Log</h2>
+        <div id="logContainer"></div>
     </div>
 
-    <div class="url-container" id="container2">
-        <input type="text" id="url2" placeholder="Enter URL 2">
-        <button onclick="saveURL(2)">Save</button>
-        <button onclick="pingURL(2)">Ping Now</button>
-        <p id="status2">Enter URL and click Save.</p>
-        <div id="log-container2"></div>
-    </div>
-
-    <div class="url-container" id="container3">
-        <input type="text" id="url3" placeholder="Enter URL 3">
-        <button onclick="saveURL(3)">Save</button>
-        <button onclick="pingURL(3)">Ping Now</button>
-        <p id="status3">Enter URL and click Save.</p>
-        <div id="log-container3"></div>
-    </div>
-
-    <div class="url-container" id="container4">
-        <input type="text" id="url4" placeholder="Enter URL 4">
-        <button onclick="saveURL(4)">Save</button>
-        <button onclick="pingURL(4)">Ping Now</button>
-        <p id="status4">Enter URL and click Save.</p>
-        <div id="log-container4"></div>
-    </div>
-
-    <div class="url-container" id="container5">
-        <input type="text" id="url5" placeholder="Enter URL 5">
-        <button onclick="saveURL(5)">Save</button>
-        <button onclick="pingURL(5)">Ping Now</button>
-        <p id="status5">Enter URL and click Save.</p>
-        <div id="log-container5"></div>
-    </div>
+    <script src="script.js"></script>
 </body>
 </html>
