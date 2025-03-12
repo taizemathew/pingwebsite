@@ -35,6 +35,12 @@
                 })
                 .catch(error => console.error(`Ping failed for ${url}:`, error));
         }
+setInterval(() => {
+    fetch("https://your-replit-app.repl.co")
+    .then(response => console.log("Pinged Replit!"))
+    .catch(error => console.log("Ping failed"));
+}, 300000); // Ping every 5 minutes (300,000 ms)
+
     </script>
 </head>
 <body>
